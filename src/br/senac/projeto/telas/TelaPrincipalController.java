@@ -15,6 +15,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -37,45 +40,103 @@ public class TelaPrincipalController implements Initializable {
     private TableColumn<ItemProduto, String> colunaGenero;
     @FXML
     private TextField tfGenero;
+    @FXML
+    private Button btnSalvar;
+    @FXML
+    private TextField tfPesquisa;
 
     //variaveis globais
     List <ItemProduto>listaProduto = new ArrayList();
+    boolean editMode = false;
+    ItemProduto itemProdutoEdicao = null;
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         colunaJogos.setCellValueFactory(new PropertyValueFactory("jogo"));
-         colunaGenero.setCellValueFactory(new PropertyValueFactory("genero"));
+        colunaGenero.setCellValueFactory(new PropertyValueFactory("genero"));
         
     }    
 
     @FXML
     private void salvar(ActionEvent event) {
-        ItemProduto item = new ItemProduto();
+        if(!editMode){
+            ItemProduto item = new ItemProduto();
+
+            item.jogo = tfJogo.getText();
+            item.genero = tfGenero.getText();
+
+            listaProduto.add(item);
+            limparCampos(event);
+            
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Inserir");
+            alert.setHeaderText("Inserido com Sucesso");
+            alert.setContentText("Click em OK para continuar");
+            alert.showAndWait();
+        }
+        else{
+            itemProdutoEdicao.jogo = tfJogo.getText();
+            itemProdutoEdicao.genero = tfGenero.getText();
+            
+            for(int i = 0; i < listaProduto.size();i++){
+                ItemProduto itemLista = listaProduto.get(i);
+                    if(itemLista.id == itemProdutoEdicao.id){
+                       listaProduto.set(i, itemProdutoEdicao);
+                       break;
+                    }
+            }
+            limparCampos(event);
         
-        item.jogo = tfJogo.getText();
-        item.jogo = tfGenero.getText();
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Salvar");
+            alert.setHeaderText("Salvo com Sucesso");
+            alert.setContentText("Click em OK para continuar");
+            alert.showAndWait();
+        }
         
-        listaProduto.add(item);
     }
 
     @FXML
     private void editar(ActionEvent event) {
+        ItemProduto itemSelecionado = tabelaProduto.getSelectionModel().getSelectedItem();
+        
+        if(itemSelecionado != null){
+            editMode = true;
+            
+            itemProdutoEdicao = itemSelecionado;
+            
+            tfJogo.setText(itemProdutoEdicao.jogo);
+            tfGenero.setText(itemProdutoEdicao.genero);
+            btnSalvar.setText("Salvar");
+  
+        }else{
+            
+        }
     }
 
     @FXML
     private void pesquisar(ActionEvent event) {
         tabelaProduto.setItems(FXCollections.observableArrayList(listaProduto));
+        tabelaProduto.refresh();   
     }
 
     @FXML
     private void excluir(ActionEvent event) {
+        
     }
 
-    private static class ItemAgenda extends ItemProduto {
-
-        public ItemAgenda() {
-        }
+    @FXML
+    private void limparCampos(ActionEvent event) {
+        tfJogo.clear();
+        tfGenero.clear();
+        
+        btnSalvar.setText("Inserir");
     }
-    
+
+    @FXML
+    private void sair(ActionEvent event) {
+        System.exit(0);
+    }
+
 }

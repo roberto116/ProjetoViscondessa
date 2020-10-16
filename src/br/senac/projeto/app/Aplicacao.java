@@ -5,6 +5,7 @@
  */
 package br.senac.projeto.app;
 
+import java.net.URL;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,7 +22,9 @@ public class Aplicacao extends Application{
     }
     
     public void start(Stage stage)throws Exception{
-        Parent TelaPrincipal = FXMLLoader.load(getClass().getResource("/br/senac/projeto/telas/TelaPrincipal.fxml"));
+        URL url = getClass().getResource("/br/senac/projeto/telas/TelaPrincipal.fxml");
+        
+        Parent TelaPrincipal = FXMLLoader.load(url);
         
         Scene scene = new Scene(TelaPrincipal);
         stage.setScene(scene);

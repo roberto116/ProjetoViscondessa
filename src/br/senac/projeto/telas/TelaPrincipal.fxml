@@ -9,27 +9,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="314.0" prefWidth="629.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.senac.projeto.telas.TelaPrincipalController">
+<AnchorPane id="AnchorPane" prefHeight="351.0" prefWidth="632.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.senac.projeto.telas.TelaPrincipalController">
    <children>
       <Accordion layoutX="267.0" layoutY="131.0" />
       <Accordion layoutX="291.0" layoutY="120.0" />
       <TextField fx:id="tfJogo" layoutX="27.0" layoutY="62.0" promptText="Jogo" />
-      <TableView fx:id="tabelaProduto" layoutX="253.0" layoutY="55.0" prefHeight="200.0" prefWidth="357.0">
+      <TableView fx:id="tabelaProduto" layoutX="254.0" layoutY="104.0" prefHeight="200.0" prefWidth="357.0">
         <columns>
           <TableColumn fx:id="colunaJogos" prefWidth="209.0" text="Jogos" />
           <TableColumn fx:id="colunaGenero" prefWidth="147.0" text="Gêneros" />
         </columns>
       </TableView>
-      <Button layoutX="27.0" layoutY="230.0" mnemonicParsing="false" onAction="#salvar" prefHeight="25.0" prefWidth="150.0" text="Salvar" />
-      <Button layoutX="476.0" layoutY="273.0" mnemonicParsing="false" onAction="#editar" prefHeight="25.0" prefWidth="52.0" text="Editar" />
-      <Button layoutX="543.0" layoutY="273.0" mnemonicParsing="false" onAction="#pesquisar" text="Pesquisar" />
-      <Button layoutX="407.0" layoutY="273.0" mnemonicParsing="false" onAction="#excluir" text="Excluir" />
-      <Button layoutX="27.0" layoutY="273.0" mnemonicParsing="false" text="Sair" />
+      <Button fx:id="btnSalvar" layoutX="27.0" layoutY="230.0" mnemonicParsing="false" onAction="#salvar" prefHeight="25.0" prefWidth="150.0" text="Inserir" />
+      <Button layoutX="552.0" layoutY="311.0" mnemonicParsing="false" onAction="#editar" prefHeight="25.0" prefWidth="52.0" text="Editar" />
+      <Button layoutX="545.0" layoutY="62.0" mnemonicParsing="false" onAction="#pesquisar" text="Pesquisar" />
+      <Button layoutX="488.0" layoutY="311.0" mnemonicParsing="false" onAction="#excluir" text="Excluir" />
+      <Button layoutX="27.0" layoutY="311.0" mnemonicParsing="false" onAction="#sair" text="Sair" />
       <Label layoutX="66.0" layoutY="14.0" text="Produto">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="tfGenero" layoutX="27.0" layoutY="108.0" promptText="Gênero" />
+      <TextField fx:id="tfGenero" layoutX="28.0" layoutY="104.0" promptText="Gênero" />
+      <Button layoutX="27.0" layoutY="191.0" mnemonicParsing="false" onAction="#limparCampos" prefHeight="25.0" prefWidth="149.0" text="Limpar" />
+      <TextField fx:id="tfPesquisa" layoutX="254.0" layoutY="62.0" prefHeight="25.0" prefWidth="276.0" />
    </children>
 </AnchorPane>
