@@ -123,7 +123,25 @@ public class TelaPrincipalController implements Initializable {
 
     @FXML
     private void excluir(ActionEvent event) {
+         ItemProduto itemSelecionado = tabelaProduto.getSelectionModel().getSelectedItem();
         
+        if(itemSelecionado != null){
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Excluir");
+            alert.setHeaderText("Excluido com Sucesso");
+            alert.setContentText("Click em OK para continuar");
+            alert.showAndWait();
+            
+             for(int i = 0; i < listaProduto.size();i++){
+                ItemProduto itemLista = listaProduto.get(i);
+                    if(itemLista.id == itemProdutoEdicao.id){
+                       listaProduto.remove(i);
+                       break;
+                       
+                    }
+            }
+  
+        }
     }
 
     @FXML
