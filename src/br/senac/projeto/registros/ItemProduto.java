@@ -13,12 +13,15 @@ public class ItemProduto {
     public int id;
     public String jogo;
     public String genero;
+    public String quantidade;
     
-    public String getJogo(){
-    return jogo;
-}
-    public String getGenero(){
-    return genero;
-}
-    
+        public String getJogo(){
+        return jogo;
+    }
+        public String getGenero(){
+        return genero;
+    }
+        public String getQuantidade(){
+        return quantidade;
+    }
 }

@@ -39,23 +39,27 @@ public class TelaPrincipalController implements Initializable {
     @FXML
     private TableColumn<ItemProduto, String> colunaGenero;
     @FXML
+    private TableColumn<ItemProduto, String> colunaQnt;
+    @FXML
     private TextField tfGenero;
     @FXML
     private Button btnSalvar;
     @FXML
     private TextField tfPesquisa;
+    @FXML
+    private TextField tfQuantidade;
 
     //variaveis globais
     List <ItemProduto>listaProduto = new ArrayList();
     boolean editMode = false;
     ItemProduto itemProdutoEdicao = null;
-    
+    int totalItens = 0;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         colunaJogos.setCellValueFactory(new PropertyValueFactory("jogo"));
         colunaGenero.setCellValueFactory(new PropertyValueFactory("genero"));
-        
+        colunaQnt.setCellValueFactory(new PropertyValueFactory("quantidade"));
     }    
 
     @FXML
@@ -65,6 +69,10 @@ public class TelaPrincipalController implements Initializable {
 
             item.jogo = tfJogo.getText();
             item.genero = tfGenero.getText();
+            item.quantidade = tfQuantidade.getText();
+            item.id = totalItens;
+            
+            totalItens++;
 
             listaProduto.add(item);
             limparCampos(event);
@@ -78,6 +86,7 @@ public class TelaPrincipalController implements Initializable {
         else{
             itemProdutoEdicao.jogo = tfJogo.getText();
             itemProdutoEdicao.genero = tfGenero.getText();
+            itemProdutoEdicao.quantidade = tfQuantidade.getText();
             
             for(int i = 0; i < listaProduto.size();i++){
                 ItemProduto itemLista = listaProduto.get(i);
@@ -86,6 +95,7 @@ public class TelaPrincipalController implements Initializable {
                        break;
                     }
             }
+            editMode = false;
             limparCampos(event);
         
             Alert alert = new Alert(AlertType.INFORMATION);
@@ -93,6 +103,8 @@ public class TelaPrincipalController implements Initializable {
             alert.setHeaderText("Salvo com Sucesso");
             alert.setContentText("Click em OK para continuar");
             alert.showAndWait();
+            
+            
         }
         
     }
@@ -108,10 +120,9 @@ public class TelaPrincipalController implements Initializable {
             
             tfJogo.setText(itemProdutoEdicao.jogo);
             tfGenero.setText(itemProdutoEdicao.genero);
-            btnSalvar.setText("Salvar");
-  
-        }else{
+            tfQuantidade.setText(itemProdutoEdicao.quantidade);
             
+            btnSalvar.setText("Salvar");
         }
     }
 
@@ -148,6 +159,7 @@ public class TelaPrincipalController implements Initializable {
     private void limparCampos(ActionEvent event) {
         tfJogo.clear();
         tfGenero.clear();
+        tfQuantidade.clear();
         
         btnSalvar.setText("Inserir");
     }
