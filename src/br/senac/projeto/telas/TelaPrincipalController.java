@@ -100,6 +100,15 @@ public class TelaPrincipalController implements Initializable {
             itemProdutoEdicao.genero = tfGenero.getText();
             itemProdutoEdicao.quantidade = tfQuantidade.getText();
             
+            if(itemProdutoEdicao.jogo.equals("") || itemProdutoEdicao.genero.equals("")|| itemProdutoEdicao.quantidade.equals("")){
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Erro");
+                alert.setHeaderText("Campos Vazio");
+                alert.setContentText("Click em OK para tentar novamente");
+                alert.showAndWait();
+                return;
+            }
+            
             for(int i = 0; i < listaProduto.size();i++){
                 ItemProduto itemLista = listaProduto.get(i);
                     if(itemLista.id == itemProdutoEdicao.id){
